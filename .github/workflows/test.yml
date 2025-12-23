@@ -47,6 +47,12 @@ jobs:
           ./gradlew jacocoTestReport
           bash <(curl -s https://codecov.io/bash)
 
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-test-report
+          path: build/reports/jacoco/test/html
+
   DockerTest:
     needs: UnitTest
     runs-on: ubuntu-latest
