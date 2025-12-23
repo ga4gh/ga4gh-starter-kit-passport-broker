@@ -3,7 +3,7 @@ package org.ga4gh.starterkit.passport.broker.controller;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.ga4gh.starterkit.common.requesthandler.BasicCreateRequestHandler;
 import org.ga4gh.starterkit.common.requesthandler.BasicDeleteRequestHandler;
