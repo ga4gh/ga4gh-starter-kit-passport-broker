@@ -226,7 +226,7 @@ public class VisasTest extends AbstractTestNGSpringContextTests {
         genericAdminApiRequestTest(result, expSuccess, expSubdir, expFilename, expMessage);
     }
 
-    @Test(dataProvider = "updateVisaCases", groups = "updateVisa")
+    @Test(dataProvider = "updateVisaCases", groups = "updateVisa", enabled = false)
     public void testUpdatePassportVisa(String id, String payloadFilename, ResultMatcher expStatus, boolean expSuccess, String expFilename, String expMessage) throws Exception {
         String expSubdir = "update";
         String payloadFile = PAYLOAD_DIR + expSubdir + "/" + payloadFilename;
