@@ -1,9 +1,7 @@
 package org.ga4gh.starterkit.passport.broker.controller;
 
-import java.util.List;
-import javax.annotation.Resource;
 import com.fasterxml.jackson.annotation.JsonView;
-
+import jakarta.annotation.Resource;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.ga4gh.starterkit.common.requesthandler.BasicCreateRequestHandler;
 import org.ga4gh.starterkit.common.requesthandler.BasicDeleteRequestHandler;
@@ -13,14 +11,9 @@ import org.ga4gh.starterkit.passport.broker.model.PassportVisa;
 import org.ga4gh.starterkit.passport.broker.utils.SerializeView;
 import org.ga4gh.starterkit.passport.broker.utils.hibernate.PassportBrokerHibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/ga4gh/passport/v1/visas")

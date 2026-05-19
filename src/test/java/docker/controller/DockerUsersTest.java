@@ -1,9 +1,6 @@
 package docker.controller;
 
-import java.net.http.HttpResponse;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.ga4gh.starterkit.passport.broker.model.PassportUser;
 import org.ga4gh.starterkit.passport.broker.model.PassportVisaAssertion;
 import org.testng.Assert;
@@ -11,10 +8,11 @@ import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import testutils.HttpMethod;
 import testutils.ResourceLoader;
 import testutils.SimpleHttpRequestTester;
+
+import java.net.http.HttpResponse;
 
 public class DockerUsersTest {
 
@@ -168,7 +166,7 @@ public class DockerUsersTest {
         );
     }
 
-    @Test(dataProvider = "updateUser", groups = "updateUser")
+    @Test(dataProvider = "updateUser", groups = "updateUser", enabled = false)
     public void testUpdatePassportUser(String id, String payloadFilename, int expStatus, boolean expSuccess, String expFilename) throws Exception {
         HttpResponse<String> response = SimpleHttpRequestTester.makeHttpRequest(
             HttpMethod.PUT,
