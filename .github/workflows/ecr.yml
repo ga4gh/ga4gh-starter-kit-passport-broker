@@ -23,10 +23,12 @@ jobs:
         run: |
           echo "DOCKER_REPO=ga4gh-starter-kit-passport-broker" >> $GITHUB_ENV
           echo "DOCKER_TAG=$(git describe --tags)" >> $GITHUB_ENV
+          source ci/set-docker-image-version.sh
+          echo "version=${DOCKER_IMG_VER}" >> $GITHUB_ENV
 
       - name: build docker image
         id: build-docker-image
-        run: docker build -t ${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }} -t ${{ env.DOCKER_REPO }}:latest -t ${{ env.DOCKER_REPO }}:develop .
+        run: docker build --build-arg VERSION=${{ env.version }} -t ${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }} -t ${{ env.DOCKER_REPO }}:latest -t ${{ env.DOCKER_REPO }}:develop .
 
       - name: configure aws credentials
         id: configure-aws-credentials
