@@ -7,9 +7,10 @@ import org.apache.commons.cli.Options;
 import org.ga4gh.starterkit.common.util.webserver.ServerPropertySetter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @ComponentScan(basePackages = "org.ga4gh.starterkit.passport.broker")
 public class PassportBroker {
     

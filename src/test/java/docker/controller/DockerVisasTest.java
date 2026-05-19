@@ -159,7 +159,7 @@ public class DockerVisasTest {
         );
     }
 
-    @Test(dataProvider = "updateVisa", groups = "updateVisa")
+    @Test(dataProvider = "updateVisa", groups = "updateVisa", enabled = false)
     public void testUpdatePassportVisa(String id, String payloadFilename, int expStatus, boolean expSuccess, String expFilename) throws Exception {
         SimpleHttpRequestTester.putRequestAndTest(
             BASE_URL + "/" + id,

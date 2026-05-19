@@ -1,16 +1,17 @@
 package org.ga4gh.starterkit.passport.broker.utils.hibernate;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import org.ga4gh.starterkit.common.hibernate.HibernateEntity;
 import org.ga4gh.starterkit.common.hibernate.HibernateUtil;
 import org.ga4gh.starterkit.passport.broker.model.PassportUser;
 import org.ga4gh.starterkit.passport.broker.model.PassportVisa;
 import org.ga4gh.starterkit.passport.broker.model.PassportVisaAssertion;
 import org.hibernate.Session;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PassportBrokerHibernateUtil extends HibernateUtil {
 
