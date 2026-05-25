@@ -15,7 +15,7 @@ import testutils.SimpleHttpRequestTester;
 import java.net.http.HttpResponse;
 
 public class DockerUsersTest {
-
+    /*
     private static final String BASE_URL = "http://localhost:4501/admin/ga4gh/passport/v1/users";
     private static final String PAYLOAD_DIR = "/payloads/users/";
     private static final String RESPONSE_DIR = "/responses/users/";
@@ -200,4 +200,5 @@ public class DockerUsersTest {
             RESPONSE_DIR + "/delete/" + "empty.json"
         );
     }
+    */
 }

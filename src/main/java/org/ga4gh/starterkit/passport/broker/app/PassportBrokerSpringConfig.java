@@ -14,7 +14,6 @@ import org.ga4gh.starterkit.common.util.webserver.AdminEndpointsConnector;
 import org.ga4gh.starterkit.common.util.webserver.AdminEndpointsFilter;
 import org.ga4gh.starterkit.common.util.webserver.CorsFilterBuilder;
 import org.ga4gh.starterkit.common.util.webserver.TomcatMultiConnectorServletWebServerFactoryCustomizer;
-import org.ga4gh.starterkit.passport.broker.utils.hibernate.PassportBrokerHibernateUtil;
 import org.ga4gh.starterkit.passport.broker.config.BrokerProps;
 import org.ga4gh.starterkit.passport.broker.model.PassportUser;
 import org.ga4gh.starterkit.passport.broker.model.PassportVisa;
@@ -131,106 +130,5 @@ public class PassportBrokerSpringConfig implements WebMvcConfigurer {
         @Qualifier(PassportBrokerConstants.FINAL_CONFIG_CONTAINER) PassportBrokerYamlConfigContainer configContainer
     ) {
         return configContainer.getPassportBrokerConfig().getBrokerProps();
-    }
-
-    /* ******************************
-     * HIBERNATE CONFIG BEANS
-     * ****************************** */
-
-    @Bean
-    public PassportBrokerHibernateUtil getPassportHibernateUtil(
-        @Qualifier(PassportBrokerConstants.FINAL_CONFIG_CONTAINER) PassportBrokerYamlConfigContainer passportConfigContainer
-    ) {
-        PassportBrokerHibernateUtil hibernateUtil = new PassportBrokerHibernateUtil();
-        hibernateUtil.setDatabaseProps(passportConfigContainer.getPassportBrokerConfig().getDatabaseProps());
-        return hibernateUtil;
-    }
-
-    /* ******************************
-     * REQUEST HANDLER BEANS
-     * ****************************** */
-
-    // USERS
-
-    @Bean
-    @RequestScope
-    public BasicShowRequestHandler<String, PassportUser> showUserRequestHandler(
-        @Autowired PassportBrokerHibernateUtil hibernateUtil
-    ) {
-        BasicShowRequestHandler<String, PassportUser> showUser = new BasicShowRequestHandler<>(PassportUser.class);
-        showUser.setHibernateUtil(hibernateUtil);
-        return showUser;
-    }
-
-    @Bean
-    @RequestScope
-    public BasicCreateRequestHandler<String, PassportUser> createUserRequestHandler(
-        @Autowired PassportBrokerHibernateUtil hibernateUtil
-    ) {
-        BasicCreateRequestHandler<String, PassportUser> createUser = new BasicCreateRequestHandler<>(PassportUser.class);
-        createUser.setHibernateUtil(hibernateUtil);
-        return createUser;
-    }
-
-    @Bean
-    @RequestScope
-    public BasicUpdateRequestHandler<String, PassportUser> updateUserRequestHandler(
-        @Autowired PassportBrokerHibernateUtil hibernateUtil
-    ) {
-        BasicUpdateRequestHandler<String, PassportUser> updateUser = new BasicUpdateRequestHandler<>(PassportUser.class);
-        updateUser.setHibernateUtil(hibernateUtil);
-        return updateUser;
-    }
-
-    @Bean
-    @RequestScope
-    public BasicDeleteRequestHandler<String, PassportUser> deleteUserRequestHandler(
-        @Autowired PassportBrokerHibernateUtil hibernateUtil
-    ) {
-        BasicDeleteRequestHandler<String, PassportUser> deleteUser = new BasicDeleteRequestHandler<>(PassportUser.class);
-        deleteUser.setHibernateUtil(hibernateUtil);
-        return deleteUser;
-    }
-
-    // VISAS
-
-    @Bean
-    @RequestScope
-    public BasicShowRequestHandler<String, PassportVisa> showVisaRequestHandler(
-        @Autowired PassportBrokerHibernateUtil hibernateUtil
-    ) {
-        BasicShowRequestHandler<String, PassportVisa> showVisa = new BasicShowRequestHandler<>(PassportVisa.class);
-        showVisa.setHibernateUtil(hibernateUtil);
-        return showVisa;
-    }
-
-    @Bean
-    @RequestScope
-    public BasicCreateRequestHandler<String, PassportVisa> createVisaRequestHandler(
-        @Autowired PassportBrokerHibernateUtil hibernateUtil
-    ) {
-        BasicCreateRequestHandler<String, PassportVisa> createVisa = new BasicCreateRequestHandler<>(PassportVisa.class);
-        createVisa.setHibernateUtil(hibernateUtil);
-        return createVisa;
-    }
-
-    @Bean
-    @RequestScope
-    public BasicUpdateRequestHandler<String, PassportVisa> updateVisaRequestHandler(
-        @Autowired PassportBrokerHibernateUtil hibernateUtil
-    ) {
-        BasicUpdateRequestHandler<String, PassportVisa> updateVisa = new BasicUpdateRequestHandler<>(PassportVisa.class);
-        updateVisa.setHibernateUtil(hibernateUtil);
-        return updateVisa;
-    }
-
-    @Bean
-    @RequestScope
-    public BasicDeleteRequestHandler<String, PassportVisa> deleteVisaRequestHandler(
-        @Autowired PassportBrokerHibernateUtil hibernateUtil
-    ) {
-        BasicDeleteRequestHandler<String, PassportVisa> deleteVisa = new BasicDeleteRequestHandler<>(PassportVisa.class);
-        deleteVisa.setHibernateUtil(hibernateUtil);
-        return deleteVisa;
     }
 }

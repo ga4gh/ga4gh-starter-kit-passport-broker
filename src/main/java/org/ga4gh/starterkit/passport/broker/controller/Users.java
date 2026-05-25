@@ -1,45 +1,33 @@
 package org.ga4gh.starterkit.passport.broker.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.annotation.Resource;
-import org.ga4gh.starterkit.common.requesthandler.BasicCreateRequestHandler;
-import org.ga4gh.starterkit.common.requesthandler.BasicDeleteRequestHandler;
-import org.ga4gh.starterkit.common.requesthandler.BasicShowRequestHandler;
-import org.ga4gh.starterkit.common.requesthandler.BasicUpdateRequestHandler;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import org.ga4gh.starterkit.passport.broker.model.PassportUser;
 import org.ga4gh.starterkit.passport.broker.model.PassportVisaAssertion;
+import org.ga4gh.starterkit.passport.broker.repository.PassportUserRepository;
 import org.ga4gh.starterkit.passport.broker.utils.SerializeView;
-import org.ga4gh.starterkit.passport.broker.utils.hibernate.PassportBrokerHibernateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin/ga4gh/passport/v1/users")
 public class Users {
 
-    @Autowired
-    private PassportBrokerHibernateUtil hibernateUtil;
+    private final PassportUserRepository passportUserRepository;
 
-    @Resource(name = "showUserRequestHandler")
-    private BasicShowRequestHandler<String, PassportUser> showUser;
-
-    @Resource(name = "createUserRequestHandler")
-    private BasicCreateRequestHandler<String, PassportUser> createUser;
-
-    @Resource(name = "updateUserRequestHandler")
-    private BasicUpdateRequestHandler<String, PassportUser> updateUser;
-
-    @Resource(name = "deleteUserRequestHandler")
-    private BasicDeleteRequestHandler<String, PassportUser> deleteUser;
+    public Users(PassportUserRepository passportUserRepository) {
+        this.passportUserRepository = passportUserRepository;
+    }
 
     @GetMapping
     @JsonView(SerializeView.User.class)
     public List<PassportUser> getPassportUsers() {
-        return hibernateUtil.getPassportUsers();
+        return passportUserRepository.findAll();
     }
 
     @GetMapping(path = "/{userId:.+}")
@@ -47,7 +35,8 @@ public class Users {
     public PassportUser getPassportUser(
         @PathVariable(name = "userId") String userId
     ) {
-        return showUser.prepare(userId).handleRequest();
+        Optional<PassportUser> passportUser = passportUserRepository.findById(userId);
+        return passportUser.orElse(null);
     }
 
     @PostMapping
@@ -63,7 +52,7 @@ public class Users {
                 assertion.setAssertedAt(epoch);
             }
         }
-        return createUser.prepare(passportUser).handleRequest();
+        return passportUserRepository.save(passportUser);
     }
 
     @PutMapping(path = "/{userId:.+}")
@@ -72,6 +61,11 @@ public class Users {
         @PathVariable(name = "userId") String userId,
         @RequestBody PassportUser passportUser
     ) {
+        PassportUser existingPassportUser = passportUserRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("Not Found"));
+        if (!existingPassportUser.getId().equals(passportUser.getId())) {
+            throw new IllegalArgumentException("User ID in path does not match user ID in request body");
+        }
+
         setBidirectionalRelationship(passportUser);
         // set assertion time to now if no assertion time exists
         Long epoch = Long.valueOf(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
@@ -80,7 +74,7 @@ public class Users {
                 assertion.setAssertedAt(epoch);
             }
         }
-        return updateUser.prepare(userId, passportUser).handleRequest();
+        return passportUserRepository.save(passportUser);
     }
 
     @DeleteMapping(path = "/{userId:.+}")
@@ -88,7 +82,8 @@ public class Users {
     public PassportUser deletePassportUser(
         @PathVariable(name = "userId") String userId
     ) {
-        return deleteUser.prepare(userId).handleRequest();
+        passportUserRepository.deleteById(userId);
+        return null;
     }
 
     private void setBidirectionalRelationship(PassportUser passportUser) {

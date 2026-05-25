@@ -13,7 +13,6 @@ import org.ga4gh.starterkit.passport.broker.model.MintRequestBody;
 import org.ga4gh.starterkit.passport.broker.model.PassportUser;
 import org.ga4gh.starterkit.passport.broker.model.PassportVisa;
 import org.ga4gh.starterkit.passport.broker.model.PassportVisaAssertion;
-import org.ga4gh.starterkit.passport.broker.utils.hibernate.PassportBrokerHibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/admin/ga4gh/passport/v1/mint")
 public class Mint {
-
+    /*
     @Autowired
     private PassportBrokerHibernateUtil hibernateUtil;
 
@@ -114,4 +113,5 @@ public class Mint {
             // JWT signature
             .sign(Algorithm.HMAC256(brokerProps.getBrokerSecret()));
     }
+    */
 }

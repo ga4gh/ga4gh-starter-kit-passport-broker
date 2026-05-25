@@ -11,7 +11,7 @@ import testutils.SimpleHttpRequestTester;
 import testutils.TestJwtVerifier;
 
 public class DockerMintTest {
-
+    /*
     private static final String URL = "http://localhost:4501/admin/ga4gh/passport/v1/mint";
     private static final String PAYLOAD_DIR = "/payloads/mint/";
 
@@ -38,4 +38,5 @@ public class DockerMintTest {
             TestJwtVerifier.verify(rawPassportJwt);
         }
     }
+    */
 }

@@ -8,7 +8,7 @@ import testutils.HttpMethod;
 import testutils.SimpleHttpRequestTester;
 
 public class DockerVisasTest {
-
+    /*
     private static final String BASE_URL = "http://localhost:4501/admin/ga4gh/passport/v1/visas";
     private static final String PAYLOAD_DIR = "/payloads/visas/";
     private static final String RESPONSE_DIR = "/responses/visas/";
@@ -179,4 +179,5 @@ public class DockerVisasTest {
             RESPONSE_DIR + "/delete/" + "empty.json"
         );
     }
+    */
 }

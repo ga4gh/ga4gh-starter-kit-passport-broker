@@ -9,7 +9,6 @@ import org.ga4gh.starterkit.common.requesthandler.BasicShowRequestHandler;
 import org.ga4gh.starterkit.common.requesthandler.BasicUpdateRequestHandler;
 import org.ga4gh.starterkit.passport.broker.model.PassportVisa;
 import org.ga4gh.starterkit.passport.broker.utils.SerializeView;
-import org.ga4gh.starterkit.passport.broker.utils.hibernate.PassportBrokerHibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +18,7 @@ import java.util.List;
 @RequestMapping("/admin/ga4gh/passport/v1/visas")
 public class Visas {
 
+    /*
     @Autowired
     private PassportBrokerHibernateUtil hibernateUtil;
 
@@ -88,4 +88,5 @@ public class Visas {
             passportVisa.getPassportVisaAssertions().forEach(assertion -> assertion.setPassportVisa(passportVisa));
         }
     }
+    */
 }
