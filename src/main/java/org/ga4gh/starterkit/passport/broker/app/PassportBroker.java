@@ -9,9 +9,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.ga4gh.starterkit.passport.broker.config.ServiceInfoConfig;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @ComponentScan(basePackages = "org.ga4gh.starterkit.passport.broker")
+@EnableConfigurationProperties(ServiceInfoConfig.class)
 public class PassportBroker {
     
     public static void main(String[] args) {
